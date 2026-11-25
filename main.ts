@@ -15,6 +15,9 @@ const LINE =
 if ([...LINE].length > 200) {
   throw new Error(`entry line is ${[...LINE].length} characters, over the 200 limit`);
 }
+if (LINE.includes("\n") || !LINE.trim()) {
+  throw new Error("entry line must be a single non-blank line");
+}
 
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", LINE, "utf8");
